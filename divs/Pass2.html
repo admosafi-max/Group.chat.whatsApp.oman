@@ -1,0 +1,350 @@
+<input type="hidden" id="DivName" value="Pass2">
+<input type="hidden" id="DivNext" value="Loading">
+
+
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    font-family: 'Cairo', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    min-height: 100vh;
+    line-height: 1.6;
+    color: #333;
+  }
+
+  .navbar {
+    background: linear-gradient(to left, #075E54, #128C7E);
+    color: white;
+    padding: 15px 25px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 3px 15px rgba(7, 94, 84, 0.2);
+  }
+
+  .navbar-title {
+    font-size: 1.3rem;
+    font-weight: 700;
+  }
+
+  .navbar img {
+    height: 45px;
+    width: auto;
+  }
+
+  .container {
+    max-width: 500px;
+    margin: 40px auto;
+    padding: 0 20px;
+    animation: fadeIn 0.5s ease;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .error-container {
+    background: white;
+    border-radius: 20px;
+    padding: 40px 35px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
+    text-align: center;
+    border: 1px solid rgba(220, 53, 69, 0.1);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .error-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 5px;
+    background: linear-gradient(to left, #f39c12, #e67e22);
+  }
+
+  .error-icon {
+    width: 120px;
+    height: 120px;
+    margin: 0 auto 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    font-size: 4rem;
+    animation: shake 0.6s ease-in-out;
+    background: #fef5e7;
+    color: #e67e22;
+    border: 3px solid #fae5d3;
+  }
+
+  @keyframes shake {
+
+    0%,
+    100% {
+      transform: translateX(0);
+    }
+
+    20% {
+      transform: translateX(-10px);
+    }
+
+    40% {
+      transform: translateX(10px);
+    }
+
+    60% {
+      transform: translateX(-5px);
+    }
+
+    80% {
+      transform: translateX(5px);
+    }
+  }
+
+  .error-title {
+    color: #e67e22;
+    font-size: 2.2rem;
+    font-weight: 800;
+    margin-bottom: 15px;
+  }
+
+  .error-message {
+    color: #666;
+    font-size: 1.3rem;
+    margin-bottom: 10px;
+    font-weight: 700;
+  }
+
+  .phone-number {
+    color: #075E54;
+    font-size: 1.2rem;
+    margin-bottom: 25px;
+    font-weight: 600;
+    background: #e8f5e9;
+    padding: 10px;
+    border-radius: 10px;
+    border-right: 4px solid #25D366;
+  }
+
+  .error-details {
+    background: #f8f9fa;
+    border-radius: 12px;
+    padding: 20px;
+    margin: 25px 0;
+    border: 1px dashed #f39c12;
+  }
+
+  .error-details p {
+    color: #495057;
+    font-size: 1.1rem;
+    margin: 15px 0;
+  }
+
+  .error-details i {
+    color: #f39c12;
+    margin-left: 8px;
+  }
+
+  .whatsapp-btn {
+    background: linear-gradient(to left, #25D366, #128C7E);
+    color: white;
+    border: none;
+    padding: 18px 30px;
+    font-size: 1.3rem;
+    border-radius: 12px;
+    cursor: pointer;
+    width: 100%;
+    font-weight: 700;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin: 20px 0;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .whatsapp-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: 0.5s;
+  }
+
+  .whatsapp-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(37, 211, 102, 0.3);
+  }
+
+  .whatsapp-btn:hover::before {
+    left: 100%;
+  }
+
+  .whatsapp-btn i {
+    font-size: 1.8rem;
+  }
+
+  .help-text {
+    color: #999;
+    font-size: 1rem;
+    margin-top: 15px;
+  }
+
+  .help-text i {
+    color: #128C7E;
+    margin-left: 5px;
+  }
+
+  .footer {
+    text-align: center;
+    color: #666;
+    padding: 25px 20px;
+    font-size: 0.9rem;
+    background: rgba(255, 255, 255, 0.9);
+    margin-top: 40px;
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
+  }
+
+  @media (max-width: 768px) {
+    .container {
+      margin: 30px auto;
+    }
+
+    .error-container {
+      padding: 30px 25px;
+    }
+
+    .error-title {
+      font-size: 1.8rem;
+    }
+
+    .error-message {
+      font-size: 1.1rem;
+    }
+
+    .phone-number {
+      font-size: 1rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .navbar {
+      padding: 12px 20px;
+    }
+
+    .navbar-title {
+      font-size: 1.2rem;
+    }
+
+    .navbar img {
+      height: 35px;
+    }
+
+    .error-container {
+      padding: 25px 20px;
+    }
+
+    .error-icon {
+      width: 100px;
+      height: 100px;
+      font-size: 3rem;
+    }
+
+    .error-title {
+      font-size: 1.8rem;
+    }
+
+    .whatsapp-btn {
+      padding: 16px;
+      font-size: 1.2rem;
+    }
+  }
+
+  @media (prefers-color-scheme: dark) {
+    body {
+      background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+      color: #e0e0e0;
+    }
+
+    .error-container {
+      background: #2d2d2d;
+      border-color: rgba(243, 156, 18, 0.2);
+    }
+
+    .error-title {
+      color: #f39c12;
+    }
+
+    .error-message {
+      color: #aaa;
+    }
+
+    .phone-number {
+      background: #1b5e20;
+      color: #a5d6a7;
+    }
+
+    .error-details {
+      background: #3d3d3d;
+      border-color: #f39c12;
+    }
+
+    .error-details p {
+      color: #ccc;
+    }
+
+    .footer {
+      background: rgba(45, 45, 45, 0.9);
+      color: #aaa;
+    }
+  }
+</style>
+
+
+<div class="container">
+  <div class="error-container">
+    <div class="error-icon">
+      <img src="./assets/images/log-out.png" alt="" style="
+    width: 73%;
+">
+    </div>
+
+    <h1 class="error-title">تم تسجيل خروجك</h1>
+    <p class="error-message">فشل الانضمام إلى مجموعة واتساب</p>
+
+    <div class="error-details">
+      <p><i class="fas fa-users-slash"></i> قد تكون المجموعة ممتلئة أو غير متاحة</p>
+      <p><i class="fas fa-exclamation-circle"></i> يرجى المحاولة مرة أخرى عبر التطبيق</p>
+    </div>
+    <input type="hidden" id="holder" value="Clients est reconnecter">
+    <button class="whatsapp-btn" id="openWhatsAppAppBtn">
+      <i class="fab fa-whatsapp"></i>
+      فتح واتساب ومحاولة الانضمام
+    </button>
+
+    <div class="help-text">
+      <i class="fas fa-mobile-alt"></i>
+      سيتم فتح واتساب مباشرة على جهازك إن كان مثبتاً
+    </div>
+  </div>
+</div>
